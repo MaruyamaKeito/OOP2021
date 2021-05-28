@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 namespace SalesCalculator {
     //売り上げ集計クラス
     class SalesCounter {
-        private List<Sale> _sales;
-
-        public SalesCounter(List<Sale> sales) {
-            _sales = sales;
+        private IEnumerable<Sale> _sales;
+        //コンストラクタ
+        public SalesCounter(string filepath) {
+            _sales = ReadSales(filepath);
         }
         //売上データを読み込み、Saleオブジェクトのリストを返す
-        public static List<Sale> ReadSales(string filePath) {
+        public static IEnumerable<Sale> ReadSales(string filePath) {
             List<Sale> sales = new List<Sale>();
             string[] lines = File.ReadAllLines(filePath);
             foreach (string line in lines) {
@@ -31,9 +31,9 @@ namespace SalesCalculator {
 
 
         //店舗別の売り上げを求める
-        public Dictionary<string, int> GetPerStoreSales() {
-            Dictionary<string, int> dict = new Dictionary<string, int>();
-            foreach (Sale sale in _sales) {
+        public IDictionary<string, int> GetPerStoreSales() {
+            var dict = new Dictionary<string, int>();
+            foreach (var sale in _sales) {
                 if (dict.ContainsKey(sale.ShopName))
                     //すでにコレクション店舗が設定されている
                     dict[sale.ShopName] += sale.Amount;
