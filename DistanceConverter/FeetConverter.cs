@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DistanceConverter {
+namespace Exercise2 {
     //フィートとメートルの単位変換クラス(静的クラス)
     public static class FeetConverter {
         private const double ratio = 0.3048;
