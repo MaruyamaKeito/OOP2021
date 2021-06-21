@@ -13,5 +13,6 @@ namespace Test01 {
                 Console.WriteLine("{0} {1}", obj.Key, obj.Value);
             }
         }
+        static List<Student> 
     }
 }
