@@ -20,6 +20,7 @@ namespace StopWatch {
 
         private void Form1_Load(object sender, EventArgs e) {
             lbTimerDisp.Text = sw.Elapsed.ToString(@"hh\:mm\:ss\.ff");
+            //lbTimerDisp.Text = "00:00:00.00";
         }
 
         private void startbt_Click(object sender, EventArgs e) {
@@ -37,6 +38,17 @@ namespace StopWatch {
         private void stopbt_Click(object sender, EventArgs e) {
             sw.Stop();
             lbTimerDisp.Text = sw.Elapsed.ToString(@"hh\:mm\:ss\.ff");
+        }
+
+        private void resetbt_Click(object sender, EventArgs e) {
+            sw.Reset();
+            lbTimerDisp.Text = sw.Elapsed.ToString(@"hh\:mm\:ss\.ff");
+            laplb.Items.Clear();
+        }
+
+        private void lapbt_Click(object sender, EventArgs e) {
+            laplb.Items.Add(sw.Elapsed.ToString(@"hh\:mm\:ss\.ff"));
+            //laplb.Items.Insert(0, lbTimerDisp.Text);
         }
     }
 }
