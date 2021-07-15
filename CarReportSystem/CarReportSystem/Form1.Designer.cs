@@ -66,6 +66,7 @@ namespace CarReportSystem {
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(149, 19);
             this.dtpDate.TabIndex = 0;
+            this.dtpDate.ValueChanged += new System.EventHandler(this.dtpDate_ValueChanged);
             // 
             // label1
             // 
@@ -314,6 +315,7 @@ namespace CarReportSystem {
             this.btOpen.TabIndex = 9;
             this.btOpen.Text = "開く";
             this.btOpen.UseVisualStyleBackColor = true;
+            this.btOpen.Click += new System.EventHandler(this.btOpen_Click);
             // 
             // btSave
             // 
@@ -323,6 +325,7 @@ namespace CarReportSystem {
             this.btSave.TabIndex = 9;
             this.btSave.Text = "保存";
             this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // btExit
             // 
