@@ -64,8 +64,10 @@ namespace CarReportSystem {
                 cbAuther.Items.Add(auther);
             }
         }
-        private void setCbCarName(string auther) {
-            
+        private void setCbCarName(string carname) {
+            if (!cbCarName.Items.Contains(carname)) {
+                cbCarName.Items.Add(carname);
+            }
         }
 
         private void dgv_CellClick(object sender, DataGridViewCellEventArgs e) {
@@ -117,31 +119,44 @@ namespace CarReportSystem {
             dgv.Refresh();//コントロールの強制再描画
         }
 
-        private void dtpDate_ValueChanged(object sender, EventArgs e) {
-            
-        }
-
         private void btSave_Click(object sender, EventArgs e) {
             if (sfdFileSave.ShowDialog() == DialogResult.OK) {
-                var bf = new BinaryFormatter();
-
-                using (FileStream fs = File.Open(sfdFileSave.FileName, FileMode.Create)) {
-                    bf.Serialize(fs, listCarReport);
+                try {
+                    var bf = new BinaryFormatter();
+                    //バイナリ形式でシリアル化
+                    using (FileStream fs = File.Open(sfdFileSave.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, listCarReport);
+                    }
+                }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+        
+        private void btOpen_Click(object sender, EventArgs e) {
+                if (ofdFileOpen.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式で逆シリアル化
+                    var bf = new BinaryFormatter();
+                    using (FileStream fs = File.Open(ofdFileOpen.FileName, FileMode.Open, FileAccess.Read)) {
+                        //逆シリアル化して読み込む
+                        listCarReport = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgv.DataSource = null;
+                        dgv.DataSource = listCarReport;
+                    }
+                }catch(Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+                foreach (var item in listCarReport) {
+                    setCbAuther(item.Auther);
+                    setCbCarName(item.CarName);
                 }
             }
         }
 
-        private void btOpen_Click(object sender, EventArgs e) {
-            if (ofdFileOpen.ShowDialog() == DialogResult.OK) {
-                //バイナリ形式で逆シリアル化
-                var bf = new BinaryFormatter(); 
-                using (FileStream fs = File.Open(ofdFileOpen.FileName, FileMode.Open, FileAccess.Read)) {
-                    //逆シリアル化して読み込む
-                    listCarReport = (BindingList<CarReport>)bf.Deserialize(fs);
-                    dgv.DataSource = null;
-                    dgv.DataSource = listCarReport;
-                }
-            }
+        private void fmMain_Load(object sender, EventArgs e) {
+            dgv.Columns[5].Visible = false;
         }
     }
 }

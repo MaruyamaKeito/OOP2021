@@ -66,7 +66,6 @@ namespace CarReportSystem {
             this.dtpDate.Name = "dtpDate";
             this.dtpDate.Size = new System.Drawing.Size(149, 19);
             this.dtpDate.TabIndex = 0;
-            this.dtpDate.ValueChanged += new System.EventHandler(this.dtpDate_ValueChanged);
             // 
             // label1
             // 
@@ -130,7 +129,9 @@ namespace CarReportSystem {
             this.gbMaker.Controls.Add(this.rbHonda);
             this.gbMaker.Controls.Add(this.rbNissan);
             this.gbMaker.Controls.Add(this.rbToyota);
-            this.gbMaker.Location = new System.Drawing.Point(83, 90);
+            this.gbMaker.Controls.Add(this.rbImport);
+            this.gbMaker.Controls.Add(this.rbOther);
+            this.gbMaker.Location = new System.Drawing.Point(84, 90);
             this.gbMaker.Name = "gbMaker";
             this.gbMaker.Size = new System.Drawing.Size(322, 47);
             this.gbMaker.TabIndex = 3;
@@ -187,7 +188,7 @@ namespace CarReportSystem {
             // rbImport
             // 
             this.rbImport.AutoSize = true;
-            this.rbImport.Location = new System.Drawing.Point(291, 107);
+            this.rbImport.Location = new System.Drawing.Point(213, 17);
             this.rbImport.Name = "rbImport";
             this.rbImport.Size = new System.Drawing.Size(59, 16);
             this.rbImport.TabIndex = 0;
@@ -199,7 +200,7 @@ namespace CarReportSystem {
             // rbOther
             // 
             this.rbOther.AutoSize = true;
-            this.rbOther.Location = new System.Drawing.Point(344, 107);
+            this.rbOther.Location = new System.Drawing.Point(268, 17);
             this.rbOther.Name = "rbOther";
             this.rbOther.Size = new System.Drawing.Size(54, 16);
             this.rbOther.TabIndex = 0;
@@ -371,8 +372,6 @@ namespace CarReportSystem {
             this.Controls.Add(this.pbPicture);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.tbReport);
-            this.Controls.Add(this.rbOther);
-            this.Controls.Add(this.rbImport);
             this.Controls.Add(this.gbMaker);
             this.Controls.Add(this.cbCarName);
             this.Controls.Add(this.cbAuther);
@@ -388,6 +387,7 @@ namespace CarReportSystem {
             this.MinimizeBox = false;
             this.Name = "fmMain";
             this.Text = "試乗レポート管理システム";
+            this.Load += new System.EventHandler(this.fmMain_Load);
             this.gbMaker.ResumeLayout(false);
             this.gbMaker.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
