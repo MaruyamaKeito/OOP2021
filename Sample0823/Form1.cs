@@ -22,8 +22,7 @@ namespace Sample0823
             int num1 = int.Parse(Value.Text);//整数に変換
             int num2 = int.Parse(Jyou.Text);
 
-            double result = Math.Pow(num1, num2);
-            Result.Text = result.ToString();
+            Result.Text = Math.Pow(num1,num2).ToString();
         }
     }
 }
