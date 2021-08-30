@@ -12,18 +12,24 @@ namespace Secsion01
         static void Main(string[] args)
         {
 
-            var xdoc = XDocument.Load("novelists.xml");
 
-            foreach (var xnovelist in xdoc.Root.Elements())
+            foreach (var novelist in novelists)
             {
-                var xname = xnovelist.Element("name");
-                var works = xnovelist.Element("masterpieces")
-                                     .Elements("title")
-                                     .Select(x => x.Value);
-
-                Console.WriteLine("{0} - {1}", xname.Value, string.Join(",", works));
+                Console.WriteLine("{0} ({1}-{2})", novelist.Name, novelist.Birth, novelist.Death.Year);
             }
+        }
 
+        public IEnumerable<Novelist> ReadNovelists()
+        {
+            var xdoc = XDocument.Load("novelists.xml");
+            var novelists = xdoc.Root.Elements()
+                                   .Select(x => new
+                                   {
+                                       Name = (String)x.Element("name"),
+                                       Birth = (DateTime)x.Element("birth"),
+                                       Death = (DateTime)x.Element("death")
+                                   });
         }
     }
 }
+
