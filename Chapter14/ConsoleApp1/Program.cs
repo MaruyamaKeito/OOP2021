@@ -17,40 +17,58 @@ namespace Section04
             new Program();
         }
 
-        // コンストラクタ
+        //コンストラクタ
         public Program()
         {
-            // DownloadString();
-            // DownloadFileAsync();
-            // OpenReadSample();
-            var results = GetWeatherReportFromYahoo(4610);
+            Console.WriteLine("地域コード入力");
+            Console.WriteLine("1:前橋\n2:みなかみ\n3:宇都宮\n4:水戸\n9:その他（直接入力)");
+            Console.Write(">");
+            int num = int.Parse(Console.ReadLine());
+            switch (num)
+            {
+                case 1:
+                    num = 4210;
+                    break;
+                case 2:
+                    num = 4220;
+                    break;
+                case 3:
+                    num = 4110;
+                    break;
+                case 4:
+                    num = 4010;
+                    break;
+                case 9:
+                    Console.WriteLine("コードを入力して下さい");
+                    Console.Write(">");
+                    num = int.Parse(Console.ReadLine());
+                    break;
+            }
+
+            var results = GetWeatherReportFromYahoo(num);
             foreach (var s in results)
             {
                 Console.WriteLine(s);
             }
-            Console.ReadLine(); // 入力まち
         }
-
-        // リスト14.15
+        //リスト14.15
         public void DownloadString()
         {
             var wc = new WebClient();
             wc.Encoding = Encoding.UTF8;
-            var html = wc.DownloadString("https://yahoo.co.jp/");
-
+            var html = wc.DownloadString("https://www.yahoo.co.jp/");
             Console.WriteLine(html);
         }
-
-        // リスト14.17
+        //リスト14.17
         private void DownloadFileAsync()
         {
             var wc = new WebClient();
-            var url = new Uri(@"C:\Users\ziund\OneDrive\デスクトップ\IMG_8825.JPG");
-            var filename = @"C:\temp\example.JPG";
+            var url = new Uri(@"C:\Users\81704\Desktop\test.txt");
+            var filename = @"C:\temp\example.zip";
             wc.DownloadProgressChanged += wc_DownloadProgressChanged;
             wc.DownloadFileCompleted += wc_DownloadFileCompleted;
             wc.DownloadFileAsync(url, filename);
-            Console.ReadLine(); // アプリケーションが終了しないようにする
+            Console.ReadLine();//アプリケーションが終了しないようにする
         }
         static void wc_DownloadProgressChanged(object sender,
                             DownloadProgressChangedEventArgs e)
@@ -63,19 +81,18 @@ namespace Section04
         {
             Console.WriteLine("ダウンロード完了");
         }
-
-        // リスト14.18(ストリームとしてダウンロード)
+        //リスト14.18
         public void OpenReadSample()
         {
             var wc = new WebClient();
-            using (var stream = wc.OpenRead(@"https://yahoo.co.jp/"))
+            using (var stream = wc.OpenRead("https://yahoo.co.jp/"))
             using (var sr = new StreamReader(stream, Encoding.UTF8))
             {
                 string html = sr.ReadToEnd();
                 Console.WriteLine(html);
             }
         }
-        // リスト14.19
+        //リスト14.19
         private static IEnumerable<string> GetWeatherReportFromYahoo(int cityCode)
         {
             using (var wc = new WebClient())
@@ -90,7 +107,7 @@ namespace Section04
                 var nodes = xdoc.Root.Descendants("title");
                 foreach (var node in nodes)
                 {
-                    string s = Regex.Replace(node.Value, "【|】| Yahoo!天気・災害", "");
+                    string s = Regex.Replace(node.Value, "【|】", "");
                     yield return s;
                 }
             }
