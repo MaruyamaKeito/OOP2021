@@ -15,6 +15,7 @@ namespace RssReader
 {
     public partial class Form1 : Form
     {
+        IEnumerable<ItemData> items = null;
         public Form1()
         {
             InitializeComponent();
@@ -25,20 +26,30 @@ namespace RssReader
             setRssTitle(tbUrl.Text);
         }
 
-        private void setRssTitle(string urlText)
+        private void setRssTitle(string uri)
         {
             using (var wc = new WebClient())
             {
                 wc.Headers.Add("Content-type", "charset=UTF-8");
-                var stream = wc.OpenRead(urlText);
+                var stream = wc.OpenRead(uri);
                 XDocument xdoc = XDocument.Load(stream);
-                var nodes = xdoc.Root.Descendants("title");
-                foreach (var node in nodes)
+                items = xdoc.Root.Descendants("item").Select(x => new ItemData
                 {
-                    string s = Regex.Replace(node.Value, "<title>", "");
-                    lbTitles.Items.Add(s);
+                    Title = (string)x.Element("title"),
+                    Link = (string)x.Element("link"),
+                    Description = (string)x.Element("description")
+                });
+                var nodes = xdoc.Root.Descendants("title");
+                foreach (var item in items)
+                {
+                    lbTitles.Items.Add(item.Title);
                 }
             }
+        }
+        private void lbTitles_Click(object sender, EventArgs e)
+        {
+            string link = (items.ToArray())[lbTitles.SelectedIndex].Link;
+            wbBrowser.Url = new Uri(link);
         }
     }
 }
