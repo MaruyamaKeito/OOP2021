@@ -50,6 +50,9 @@ namespace RssReader
         {
             string link = (items.ToArray())[lbTitles.SelectedIndex].Link;
             wbBrowser.Url = new Uri(link);
+
+            lbDescription.Text = "概要\n";
+            lbDescription.Text += (items.ToArray())[lbTitles.SelectedIndex].Description;
         }
     }
 }

@@ -34,6 +34,7 @@ namespace RssReader
             this.lbTitles = new System.Windows.Forms.ListBox();
             this.btRead = new System.Windows.Forms.Button();
             this.wbBrowser = new System.Windows.Forms.WebBrowser();
+            this.lbDescription = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -57,9 +58,9 @@ namespace RssReader
             // 
             this.lbTitles.FormattingEnabled = true;
             this.lbTitles.ItemHeight = 15;
-            this.lbTitles.Location = new System.Drawing.Point(17, 47);
+            this.lbTitles.Location = new System.Drawing.Point(17, 77);
             this.lbTitles.Name = "lbTitles";
-            this.lbTitles.Size = new System.Drawing.Size(266, 394);
+            this.lbTitles.Size = new System.Drawing.Size(266, 364);
             this.lbTitles.TabIndex = 2;
             // 
             // btRead
@@ -80,11 +81,20 @@ namespace RssReader
             this.wbBrowser.Size = new System.Drawing.Size(499, 394);
             this.wbBrowser.TabIndex = 4;
             // 
+            // lbDescription
+            // 
+            this.lbDescription.Location = new System.Drawing.Point(17, 47);
+            this.lbDescription.Name = "lbDescription";
+            this.lbDescription.Size = new System.Drawing.Size(100, 23);
+            this.lbDescription.TabIndex = 5;
+            this.lbDescription.Text = "label2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lbDescription);
             this.Controls.Add(this.wbBrowser);
             this.Controls.Add(this.btRead);
             this.Controls.Add(this.lbTitles);
@@ -104,6 +114,7 @@ namespace RssReader
         private System.Windows.Forms.ListBox lbTitles;
         private System.Windows.Forms.Button btRead;
         private System.Windows.Forms.WebBrowser wbBrowser;
+        private System.Windows.Forms.Label lbDescription;
     }
 }
 
