@@ -69,7 +69,7 @@ namespace Exercise2 {
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(197, 286);
             this.Controls.Add(this.btChange);
             this.Controls.Add(this.btChangeFile);
             this.Controls.Add(this.btOpen);
