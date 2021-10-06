@@ -6,9 +6,11 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace SendMail
 {
@@ -81,6 +83,14 @@ namespace SendMail
         {
             new ConfigForm().ShowDialog();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            using (var reader = XmlReader.Create("mailsettings.xml"))
+            {
+                var serializer = new DataContractSerializer(typeof(Settings));
+                var readData = serializer.ReadObject(reader) as Settings;
+            }
+        }
     }
 }
-//32102@ojs.ac.jp

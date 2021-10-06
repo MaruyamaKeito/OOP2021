@@ -4,32 +4,46 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace SendMail
 {
     public partial class ConfigForm : Form
     {
-        private Settings setting = Settings.getInstance();
+        private Settings settings = Settings.getInstance();
         public ConfigForm()
         {
             InitializeComponent();
         }
         private void btDefault_Click(object sender, EventArgs e)
         {
-            tbHost.Text = setting.sHost(); //ホスト名
-            tbPort.Text = setting.sPort(); //ポート番号
-            tbUserName.Text = setting.sMailAddr(); //ユーザー名
-            tbPass.Text = setting.sPass(); //パスワード
-            cbSsl.Checked = setting.bSsl(); //SSL
-            tbSender.Text = setting.sMailAddr(); //送信元
+            tbHost.Text = settings.sHost(); //ホスト名
+            tbPort.Text = settings.sPort(); //ポート番号
+            tbUserName.Text = settings.sMailAddr(); //ユーザー名
+            tbPass.Text = settings.sPass(); //パスワード
+            cbSsl.Checked = settings.bSsl(); //SSL
+            tbSender.Text = settings.sMailAddr(); //送信元
         }
 
         private void btOK_Click(object sender, EventArgs e)
         {
             settingregist();
+            var settings = new XmlWriterSettings
+            {
+                Encoding = new System.Text.UTF8Encoding(false),
+                Indent = true,
+                IndentChars = " ",
+            };
+
+            using (var writer = XmlWriter.Create("mailsetting.xml",settings))
+            {
+                var serializer = new DataContractSerializer(settings.GetType());
+                serializer.WriteObject(writer, settings);
+            }
             this.Close();
         }
 
@@ -44,11 +58,24 @@ namespace SendMail
         }
         private void settingregist()
         {
-            setting.Host = tbHost.Text;
-            setting.Port = int.Parse(tbPort.Text);
-            setting.MailAddr = tbUserName.Text;
-            setting.Pass = tbPass.Text;
-            setting.Ssl = cbSsl.Checked;
+            settings.Host = tbHost.Text;
+            settings.Port = int.Parse(tbPort.Text);
+            settings.MailAddr = tbUserName.Text;
+            settings.Pass = tbPass.Text;
+            settings.Ssl = cbSsl.Checked;
+
+            var xws = new XmlWriterSettings
+            {
+                Encoding = new System.Text.UTF8Encoding(false),
+                Indent = true,
+                IndentChars = "   ",
+            };
+
+            using (var writer = XmlWriter.Create("mailsetting.xml",xws))
+            {
+                var serializer = new DataContractSerializer(settings.GetType());
+                serializer.WriteObject(writer, settings);
+            }
         }
     }
 }
