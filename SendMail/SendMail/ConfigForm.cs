@@ -73,9 +73,20 @@ namespace SendMail
 
             using (var writer = XmlWriter.Create("mailsetting.xml",xws))
             {
+                //XMLファイル書き出し(シリアル化)
                 var serializer = new DataContractSerializer(settings.GetType());
                 serializer.WriteObject(writer, settings);
             }
+        }
+
+        private void ConfigForm_Load(object sender, EventArgs e)
+        {
+            tbHost.Text = settings.Host;
+            tbPort.Text = settings.Port.ToString();
+            tbUserName.Text = settings.MailAddr;
+            tbPass.Text = settings.Pass;
+            cbSsl.Checked = settings.Ssl;
+            tbSender.Text = settings.MailAddr;
         }
     }
 }

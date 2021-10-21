@@ -41,7 +41,6 @@ namespace SendMail
                     mailMessage.Bcc.Add(tbBcc.Text);
                 }
 
-
                 //件名
                 mailMessage.Subject = tbTitle.Text;
                 //本文
@@ -86,10 +85,16 @@ namespace SendMail
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //XMLファイルを読み込み(逆シリアル化)
             using (var reader = XmlReader.Create("mailsettings.xml"))
             {
                 var serializer = new DataContractSerializer(typeof(Settings));
-                var readData = serializer.ReadObject(reader) as Settings;
+                var readSettings = serializer.ReadObject(reader) as Settings;
+                settings.Host = readSettings.Host;
+                settings.Port = readSettings.Port;
+                settings.MailAddr = readSettings.MailAddr;
+                settings.Pass = readSettings.Pass;
+                settings.Ssl = readSettings.Ssl;
             }
         }
     }

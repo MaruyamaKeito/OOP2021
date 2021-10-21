@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace SendMail
 {
@@ -17,7 +19,10 @@ namespace SendMail
         public bool Ssl { get; set; }//SSL
 
         //コンストラクタ
-        private Settings() { }
+        private Settings() 
+        {
+
+        }
 
         //インスタンスの取得
         public static Settings getInstance()
@@ -25,8 +30,27 @@ namespace SendMail
             if(instance == null)
             {
                 instance = new Settings();
+                //XMLファイルを読み込み(逆シリアル化)
+                using (var reader = XmlReader.Create("mailsettings.xml"))
+                {
+                    var serializer = new DataContractSerializer(typeof(Settings));
+                    var readSettings = serializer.ReadObject(reader) as Settings;
+
+                    instance.Host = readSettings.Host;
+                    instance.Port = readSettings.Port;
+                    instance.MailAddr = readSettings.MailAddr;
+                    instance.Pass = readSettings.Pass;
+                    instance.Ssl = readSettings.Ssl;
+                }
             }
             return instance;
+        }
+        //送信データ登録
+        public void setSendConfig(string host,string port,string pass,bool ssl)
+        {
+            Host = host;
+            Port = port;
+            MailAddr = MailAddr;
         }
 
         //初期値
