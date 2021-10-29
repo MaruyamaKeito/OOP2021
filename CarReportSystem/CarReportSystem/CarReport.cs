@@ -12,7 +12,7 @@ namespace CarReportSystem {
         [DisplayName("日付")]
         public DateTime Date { get; set; }//日付
         [DisplayName("記録者")]
-        public string Auther { get; set; }//記録者
+        public string Author { get; set; }//記録者
         [DisplayName("メーカー")]
         public MakerGroup Maker { get; set; }//メーカー
         [DisplayName("車名")]
@@ -34,9 +34,9 @@ namespace CarReportSystem {
         }
 
         //データ更新
-        public void UpDate(DateTime date,string auther,MakerGroup maker,string CarName,string report,Image picture) {
+        public void UpDate(DateTime date,string author,MakerGroup maker,string CarName,string report,Image picture) {
             this.Date = date;
-            this.Auther = auther;
+            this.Author = author;
             this.Maker = maker;
             this.CarName = CarName;
             this.Report = report;
