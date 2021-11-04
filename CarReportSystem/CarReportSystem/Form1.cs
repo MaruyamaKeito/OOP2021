@@ -92,6 +92,7 @@ namespace CarReportSystem
             if (e.RowIndex == 1)
             {
                 return;
+            }
 
                 //選択された行のデータを取得
                 CarReport selectedCar = listCarReport[e.RowIndex];
@@ -104,7 +105,7 @@ namespace CarReportSystem
                 tbReport.Text = selectedCar.Report;
                 pbPicture.Image = selectedCar.Picture;
 
-            }
+            
         }
         private void setMakerRadioButton(CarReport.MakerGroup mg)
         {
