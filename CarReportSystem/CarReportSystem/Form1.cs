@@ -157,8 +157,12 @@ namespace CarReportSystem
         // バイト配列をImageオブジェクトに変換
         public static Image ByteArrayToImage(byte[] b)
         {
-            ImageConverter imgconv = new ImageConverter();
-            Image img = (Image)imgconv.ConvertFrom(b);
+            Image img = null;
+            if (b.Length > 0)
+            {
+                ImageConverter imgconv = new ImageConverter();
+                img = (Image)imgconv.ConvertFrom(b);
+            }
             return img;
         }
 
@@ -178,9 +182,14 @@ namespace CarReportSystem
                 pbPicture.Image = ByteArrayToImage((byte[])carReportDataGridView.CurrentRow.Cells[6].Value);     //画像
 
             }
-            catch (Exception)
+            catch(InvalidCastException)
             {
                 pbPicture.Image = null;
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+                ssErrorLabel.Text = ex.Message; //ステータスエリアに表示
             }
 #if false
             if (sfdFileSave.ShowDialog() == DialogResult.OK) {
@@ -211,7 +220,8 @@ namespace CarReportSystem
             carReportDataGridView.Columns[3].HeaderText = "メーカー";
             carReportDataGridView.Columns[4].HeaderText = "車種";
             carReportDataGridView.Columns[5].HeaderText = "レポート";
-            carReportDataGridView.Columns[6].HeaderText = "画像";
+            //carReportDataGridView.Columns[6].HeaderText = "画像";
+            carReportDataGridView.Columns[6].Visible = false;
         }
 
         private void carReportBindingNavigatorSaveItem_Click(object sender, EventArgs e)
