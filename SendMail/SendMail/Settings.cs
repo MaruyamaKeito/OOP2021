@@ -49,7 +49,7 @@ namespace SendMail
         public void setSendConfig(string host,string port,string pass,bool ssl)
         {
             Host = host;
-            Port = port;
+            Port = int.Parse(port);
             MailAddr = MailAddr;
         }
 

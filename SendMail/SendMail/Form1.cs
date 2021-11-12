@@ -97,5 +97,20 @@ namespace SendMail
                 settings.Ssl = readSettings.Ssl;
             }
         }
+
+        private void 終了ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void 新規作成ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tbBcc.Text = "";
+            tbCc.Text = "";
+            tbMessage.Text = "";
+            tbTitle.Text = "";
+            tbTo.Text = "";
+
+        }
     }
 }
