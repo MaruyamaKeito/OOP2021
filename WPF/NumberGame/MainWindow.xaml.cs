@@ -20,14 +20,37 @@ namespace NumberGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        int rand = 0;
         public MainWindow()
         {
             InitializeComponent();
+            random(1, 26);
+        }
+        public void random(int min,int max)
+        {
+            Random r1 = new System.Random();
+            rand = r1.Next(min, max);
         }
 
-        private void bt1_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            bt1.Background = Brushes.Blue;
+            Button bt = e.Source as Button;
+            bt.Background = Brushes.Red;
+
+            int select = int.Parse((string)bt.Content);
+
+            if (rand == select)
+            {
+                tbAns.Text = "正解です";
+            }
+            else if(rand > select)
+            {
+                tbAns.Text = "小さいです";
+            }
+            else if(rand < select)
+            {
+                tbAns.Text = "大きいです";
+            }
         }
     }
 }
