@@ -41,7 +41,6 @@ namespace SendMail
             this.tbBcc = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btConfig = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ファイルToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.新規作成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -176,17 +175,6 @@ namespace SendMail
             this.label6.TabIndex = 0;
             this.label6.Text = "Cc：";
             // 
-            // btConfig
-            // 
-            this.btConfig.Font = new System.Drawing.Font("MS UI Gothic", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btConfig.Location = new System.Drawing.Point(103, 489);
-            this.btConfig.Name = "btConfig";
-            this.btConfig.Size = new System.Drawing.Size(81, 37);
-            this.btConfig.TabIndex = 3;
-            this.btConfig.Text = "設定";
-            this.btConfig.UseVisualStyleBackColor = true;
-            this.btConfig.Click += new System.EventHandler(this.btConfig_Click);
-            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -214,7 +202,7 @@ namespace SendMail
             this.新規作成ToolStripMenuItem.Name = "新規作成ToolStripMenuItem";
             this.新規作成ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.新規作成ToolStripMenuItem.Text = "新規作成";
-            this.新規作成ToolStripMenuItem.Click += new System.EventHandler(this.新規作成ToolStripMenuItem_Click);
+            this.新規作成ToolStripMenuItem.Click += new System.EventHandler(this.新規作成NToolStripMenuItem_Click);
             // 
             // 設定ToolStripMenuItem
             // 
@@ -228,7 +216,7 @@ namespace SendMail
             this.終了ToolStripMenuItem.Name = "終了ToolStripMenuItem";
             this.終了ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.終了ToolStripMenuItem.Text = "終了";
-            this.終了ToolStripMenuItem.Click += new System.EventHandler(this.終了ToolStripMenuItem_Click);
+            this.終了ToolStripMenuItem.Click += new System.EventHandler(this.終了XToolStripMenuItem_Click);
             // 
             // 編集ToolStripMenuItem
             // 
@@ -247,7 +235,6 @@ namespace SendMail
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(600, 532);
-            this.Controls.Add(this.btConfig);
             this.Controls.Add(this.btSend);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.tbMessage);
@@ -287,7 +274,6 @@ namespace SendMail
         private System.Windows.Forms.TextBox tbBcc;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btConfig;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem ファイルToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 新規作成ToolStripMenuItem;

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace SendMail
 {
@@ -21,72 +22,49 @@ namespace SendMail
         }
         private void btDefault_Click(object sender, EventArgs e)
         {
-            tbHost.Text = settings.sHost(); //ホスト名
-            tbPort.Text = settings.sPort(); //ポート番号
-            tbUserName.Text = settings.sMailAddr(); //ユーザー名
-            tbPass.Text = settings.sPass(); //パスワード
-            cbSsl.Checked = settings.bSsl(); //SSL
-            tbSender.Text = settings.sMailAddr(); //送信元
+            tbHost.Text = settings.sHost();
+            tbPass.Text = settings.sPass();
+            tbPort.Text = settings.sPort();
+            tbUserName.Text = settings.sMailAddr();
+            tbSender.Text = settings.sMailAddr();
+            cbSsl.Checked = settings.bSsl();
         }
-
+        private void btApply_Click(object sender, EventArgs e)
+        {
+            settings.setSendConfig(tbHost.Text, int.Parse(tbPort.Text),tbUserName.Text, tbPass.Text, cbSsl.Checked);
+        }
         private void btOK_Click(object sender, EventArgs e)
         {
-            settingregist();
-            var settings = new XmlWriterSettings
-            {
-                Encoding = new System.Text.UTF8Encoding(false),
-                Indent = true,
-                IndentChars = " ",
-            };
-
-            using (var writer = XmlWriter.Create("mailsetting.xml",settings))
-            {
-                var serializer = new DataContractSerializer(settings.GetType());
-                serializer.WriteObject(writer, settings);
-            }
+            btApply_Click(sender, e);
             this.Close();
         }
-
         private void btCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void btApply_Click(object sender, EventArgs e)
+        private void sendMailAdd()
         {
-            settingregist();
-        }
-        private void settingregist()
-        {
-            settings.Host = tbHost.Text;
-            settings.Port = int.Parse(tbPort.Text);
-            settings.MailAddr = tbUserName.Text;
-            settings.Pass = tbPass.Text;
-            settings.Ssl = cbSsl.Checked;
-
-            var xws = new XmlWriterSettings
+            var configSettings = new XmlWriterSettings
             {
                 Encoding = new System.Text.UTF8Encoding(false),
                 Indent = true,
-                IndentChars = "   ",
+                IndentChars = "  ",
             };
-
-            using (var writer = XmlWriter.Create("mailsetting.xml",xws))
+            using (var writer = XmlWriter.Create("mailsetting.xml", configSettings))
             {
-                //XMLファイル書き出し(シリアル化)
                 var serializer = new DataContractSerializer(settings.GetType());
                 serializer.WriteObject(writer, settings);
             }
         }
-
+        //ロードすると一度だけ実行されるイベントハンドラ
         private void ConfigForm_Load(object sender, EventArgs e)
         {
             tbHost.Text = settings.Host;
+            tbPass.Text = settings.Pass;
             tbPort.Text = settings.Port.ToString();
             tbUserName.Text = settings.MailAddr;
-            tbPass.Text = settings.Pass;
-            cbSsl.Checked = settings.Ssl;
             tbSender.Text = settings.MailAddr;
+            cbSsl.Checked = settings.Ssl;
         }
     }
 }

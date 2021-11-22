@@ -11,26 +11,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace SendMail
 {
     public partial class Form1 : Form
     {
+        private ConfigForm configForm = new ConfigForm();
         private Settings settings = Settings.getInstance();
 
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void btSend_Click(object sender, EventArgs e)
         {
+
+            if (!Settings.Set)
+            {
+                MessageBox.Show("設定してください");
+                return;
+            }
             try
             {
+                //メール送信のためのインスタンスを生成
                 MailMessage mailMessage = new MailMessage();
-                //アドレス
+                //差出人アドレス
                 mailMessage.From = new MailAddress(settings.MailAddr);
-                //宛先
+                //宛先（To）
+                if (tbTo.Text == "")
+                {
+                    MessageBox.Show("アドレスが入力されてません");
+                    return;
+                }
                 mailMessage.To.Add(tbTo.Text);
                 if (tbCc.Text != "")
                 {
@@ -40,32 +55,36 @@ namespace SendMail
                 {
                     mailMessage.Bcc.Add(tbBcc.Text);
                 }
-
-                //件名
+                //件名（タイトル）
                 mailMessage.Subject = tbTitle.Text;
                 //本文
                 mailMessage.Body = tbMessage.Text;
-
-                //SMTPを使って送信する
+                if (tbMessage.Text == null || tbMessage.Text == string.Empty)
+                {
+                    MessageBox.Show("本文が入力されてません");
+                    return;
+                }
+                //SMTPを使ってメールを送信する
                 SmtpClient smtpClient = new SmtpClient();
-                smtpClient.Credentials = new NetworkCredential(settings.MailAddr,settings.Pass);
+                //メール送信のための認証情報を設定（ユーザー名、パスワード）
+                smtpClient.Credentials = new NetworkCredential(settings.MailAddr, settings.Pass);
                 smtpClient.Host = settings.Host;
                 smtpClient.Port = settings.Port;
                 smtpClient.EnableSsl = settings.Ssl;
-
+                // smtpClient.Send(mailMessage);
                 //送信完了時に呼ばれるイベントハンドラの登録
                 smtpClient.SendCompleted += SmtpClient_SendCompleted;
-                string userState = "SendMail";
+                //smtpClient.SendCompleted += new SendCompletedEventHandler(SmtpClient_SendCompleted);  古い考え
+                string userState = "Send";
+                clear();
                 smtpClient.SendAsync(mailMessage, userState);
-
-                //MessageBox.Show("送信完了");
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-
+        //送信が完了すると呼ばれるコールバックメソッド
         private void SmtpClient_SendCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Error != null)
@@ -77,40 +96,34 @@ namespace SendMail
                 MessageBox.Show("送信完了");
             }
         }
-
         private void btConfig_Click(object sender, EventArgs e)
         {
-            new ConfigForm().ShowDialog();
+            configForm.ShowDialog();
         }
-
+        //XMLファイルを読み込む
         private void Form1_Load(object sender, EventArgs e)
         {
-            //XMLファイルを読み込み(逆シリアル化)
-            using (var reader = XmlReader.Create("mailsettings.xml"))
+            //起動時に送信情報が未設定の場合設定画面を表示する
+            if (!Settings.Set)
             {
-                var serializer = new DataContractSerializer(typeof(Settings));
-                var readSettings = serializer.ReadObject(reader) as Settings;
-                settings.Host = readSettings.Host;
-                settings.Port = readSettings.Port;
-                settings.MailAddr = readSettings.MailAddr;
-                settings.Pass = readSettings.Pass;
-                settings.Ssl = readSettings.Ssl;
+                configForm.ShowDialog();
             }
         }
-
-        private void 終了ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 終了XToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
-
-        private void 新規作成ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 新規作成NToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            clear();
+        }
+        public void clear()
+        {
+            tbTo.Text = "";
             tbBcc.Text = "";
             tbCc.Text = "";
-            tbMessage.Text = "";
             tbTitle.Text = "";
-            tbTo.Text = "";
-
+            tbMessage.Text = "";
         }
     }
 }
