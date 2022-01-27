@@ -130,6 +130,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NumberGame", "WPF\NumberGam
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{D4DE95C5-1AD9-4979-AF40-4A0AE865ABC7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AttendanceManagement", "AttendanceManagement", "{EA9387EB-4E16-409E-BC83-E0EE6F2868D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AttendanceManagement", "AttendanceManagement\AttendanceManagement\AttendanceManagement.csproj", "{C4F98207-9404-4AFB-8D46-0AE7EC6F46C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -292,6 +296,10 @@ Global
 		{FAA1BC1B-1C17-46E3-B5BB-2D619D5D4132}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAA1BC1B-1C17-46E3-B5BB-2D619D5D4132}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAA1BC1B-1C17-46E3-B5BB-2D619D5D4132}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F98207-9404-4AFB-8D46-0AE7EC6F46C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F98207-9404-4AFB-8D46-0AE7EC6F46C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F98207-9404-4AFB-8D46-0AE7EC6F46C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F98207-9404-4AFB-8D46-0AE7EC6F46C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -337,6 +345,7 @@ Global
 		{E01A80D0-FB6B-4DB3-9834-FE1199870AC3} = {FA5BEE56-A252-44C6-BB76-81C9A2A58C99}
 		{93C2F043-0D1E-4523-85DB-FD954F9D575E} = {FA5BEE56-A252-44C6-BB76-81C9A2A58C99}
 		{FAA1BC1B-1C17-46E3-B5BB-2D619D5D4132} = {FA5BEE56-A252-44C6-BB76-81C9A2A58C99}
+		{C4F98207-9404-4AFB-8D46-0AE7EC6F46C0} = {EA9387EB-4E16-409E-BC83-E0EE6F2868D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {328D0478-8B13-4E3F-A9A5-9D83BCA862A1}

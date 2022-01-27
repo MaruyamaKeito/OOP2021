@@ -34,10 +34,9 @@ namespace AttendanceManagement
             this.btStartRest = new System.Windows.Forms.Button();
             this.btStartWork = new System.Windows.Forms.Button();
             this.btRegist = new System.Windows.Forms.Button();
-            this.btClear = new System.Windows.Forms.Button();
-            this.btEdit = new System.Windows.Forms.Button();
+            this.btNew = new System.Windows.Forms.Button();
             this.btBack1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgbtime = new System.Windows.Forms.DataGridView();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmpNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartWork = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -45,8 +44,8 @@ namespace AttendanceManagement
             this.EndRest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EndWork = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbEmpNo = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            ((System.ComponentModel.ISupportInitialize)(this.dgbtime)).BeginInit();
             this.SuspendLayout();
             // 
             // btEndWork
@@ -99,29 +98,19 @@ namespace AttendanceManagement
             this.btRegist.UseVisualStyleBackColor = true;
             this.btRegist.Click += new System.EventHandler(this.btRegist_Click);
             // 
-            // btClear
+            // btNew
             // 
-            this.btClear.Location = new System.Drawing.Point(669, 216);
-            this.btClear.Name = "btClear";
-            this.btClear.Size = new System.Drawing.Size(119, 48);
-            this.btClear.TabIndex = 9;
-            this.btClear.Text = "クリア";
-            this.btClear.UseVisualStyleBackColor = true;
-            this.btClear.Click += new System.EventHandler(this.btClear_Click);
-            // 
-            // btEdit
-            // 
-            this.btEdit.Location = new System.Drawing.Point(668, 162);
-            this.btEdit.Name = "btEdit";
-            this.btEdit.Size = new System.Drawing.Size(119, 48);
-            this.btEdit.TabIndex = 10;
-            this.btEdit.Text = "編集";
-            this.btEdit.UseVisualStyleBackColor = true;
-            this.btEdit.Click += new System.EventHandler(this.btEdit_Click);
+            this.btNew.Location = new System.Drawing.Point(669, 216);
+            this.btNew.Name = "btNew";
+            this.btNew.Size = new System.Drawing.Size(119, 48);
+            this.btNew.TabIndex = 9;
+            this.btNew.Text = "新規";
+            this.btNew.UseVisualStyleBackColor = true;
+            this.btNew.Click += new System.EventHandler(this.btNew_Click);
             // 
             // btBack1
             // 
-            this.btBack1.Location = new System.Drawing.Point(669, 108);
+            this.btBack1.Location = new System.Drawing.Point(669, 162);
             this.btBack1.Name = "btBack1";
             this.btBack1.Size = new System.Drawing.Size(119, 48);
             this.btBack1.TabIndex = 11;
@@ -129,21 +118,21 @@ namespace AttendanceManagement
             this.btBack1.UseVisualStyleBackColor = true;
             this.btBack1.Click += new System.EventHandler(this.btBack_Click);
             // 
-            // dataGridView1
+            // dgbtime
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgbtime.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgbtime.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Name,
             this.EmpNo,
             this.StartWork,
             this.StartRest,
             this.EndRest,
             this.EndWork});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 108);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 21;
-            this.dataGridView1.Size = new System.Drawing.Size(643, 210);
-            this.dataGridView1.TabIndex = 7;
+            this.dgbtime.Location = new System.Drawing.Point(12, 108);
+            this.dgbtime.Name = "dgbtime";
+            this.dgbtime.RowTemplate.Height = 21;
+            this.dgbtime.Size = new System.Drawing.Size(643, 210);
+            this.dgbtime.TabIndex = 7;
             // 
             // Name
             // 
@@ -182,12 +171,12 @@ namespace AttendanceManagement
             this.tbEmpNo.Size = new System.Drawing.Size(200, 19);
             this.tbEmpNo.TabIndex = 6;
             // 
-            // dateTimePicker1
+            // dtpDate
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 12);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 19);
-            this.dateTimePicker1.TabIndex = 5;
+            this.dtpDate.Location = new System.Drawing.Point(12, 12);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(200, 19);
+            this.dtpDate.TabIndex = 5;
             // 
             // Form2
             // 
@@ -199,15 +188,14 @@ namespace AttendanceManagement
             this.Controls.Add(this.btStartRest);
             this.Controls.Add(this.btStartWork);
             this.Controls.Add(this.btRegist);
-            this.Controls.Add(this.btClear);
-            this.Controls.Add(this.btEdit);
+            this.Controls.Add(this.btNew);
             this.Controls.Add(this.btBack1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgbtime);
             this.Controls.Add(this.tbEmpNo);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Name = "Form2";
+            this.Controls.Add(this.dtpDate);
+            //this.Name = "Form2";
             this.Text = "登録";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgbtime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,12 +208,11 @@ namespace AttendanceManagement
         private System.Windows.Forms.Button btStartRest;
         private System.Windows.Forms.Button btStartWork;
         private System.Windows.Forms.Button btRegist;
-        private System.Windows.Forms.Button btClear;
-        private System.Windows.Forms.Button btEdit;
+        private System.Windows.Forms.Button btNew;
         private System.Windows.Forms.Button btBack1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgbtime;
         private System.Windows.Forms.TextBox tbEmpNo;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmpNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn StartWork;
