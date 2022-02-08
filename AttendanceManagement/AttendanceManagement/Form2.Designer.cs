@@ -29,6 +29,7 @@ namespace AttendanceManagement
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btEndWork = new System.Windows.Forms.Button();
             this.btEndRest = new System.Windows.Forms.Button();
             this.btStartRest = new System.Windows.Forms.Button();
@@ -45,6 +46,9 @@ namespace AttendanceManagement
             this.EndWork = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbEmpNo = new System.Windows.Forms.TextBox();
             this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lbNowTime = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgbtime)).BeginInit();
             this.SuspendLayout();
             // 
@@ -178,11 +182,36 @@ namespace AttendanceManagement
             this.dtpDate.Size = new System.Drawing.Size(200, 19);
             this.dtpDate.TabIndex = 5;
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lbNowTime
+            // 
+            this.lbNowTime.AutoSize = true;
+            this.lbNowTime.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbNowTime.Location = new System.Drawing.Point(526, 43);
+            this.lbNowTime.Name = "lbNowTime";
+            this.lbNowTime.Size = new System.Drawing.Size(0, 59);
+            this.lbNowTime.TabIndex = 16;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(521, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "現在時刻";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ClientSize = new System.Drawing.Size(800, 325);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbNowTime);
             this.Controls.Add(this.btEndWork);
             this.Controls.Add(this.btEndRest);
             this.Controls.Add(this.btStartRest);
@@ -195,6 +224,7 @@ namespace AttendanceManagement
             this.Controls.Add(this.dtpDate);
             //this.Name = "Form2";
             this.Text = "登録";
+            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgbtime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -219,5 +249,8 @@ namespace AttendanceManagement
         private System.Windows.Forms.DataGridViewTextBoxColumn StartRest;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndRest;
         private System.Windows.Forms.DataGridViewTextBoxColumn EndWork;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lbNowTime;
+        private System.Windows.Forms.Label label1;
     }
 }
